@@ -7,7 +7,15 @@ const run = () => {
   axios
     .get(`https://eth.blockscout.com/api/v2/addresses/${address}/transactions`)
     .then(res => {
-      console.log("##", JSON.stringify(res.data), "##");
+      let transactions = [];
+      for (let item of res.data.items) {
+        transactions.push(item.hash);
+      }
+      console.log(
+        "##",
+        JSON.stringify({ transactions: transactions.join(", ") }),
+        "##",
+      );
     });
 };
 run();
